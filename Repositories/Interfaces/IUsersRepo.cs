@@ -7,7 +7,7 @@ namespace SaudePlus.Repositories.Interfaces
         Task<List<UserModels>> SearchAllUsers();
         Task<UserModels> SearchByID (int id);
         Task<UserModels> Add (UserModels usuario, int id);
-        Task<UserModels> Update (int id);
+        Task<UserModels> Update (UserModels user, int id);
         Task<bool> Delete (int id);
         
     }

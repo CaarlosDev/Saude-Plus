@@ -31,7 +31,7 @@ namespace SaudePlus.Repositories
             return user;
         }
 
-        public async Task<UserModels> Update(int id)
+        public async Task<UserModels> Update(UserModels user, int id)
         {
             UserModels userById = await SearchByID(id);
             throw new NotImplementedException();
@@ -39,8 +39,9 @@ namespace SaudePlus.Repositories
             {
                 throw new Exception($"User By Id: {id}  not found");
             }
-     //       userById.Username = UserModels.Username;
-      //      userById.Password = UserModels.Password;
+            userById.Username = user.Username;
+            userById.Password = user.Password;
+            userById.id = user.id;
 
         }
 
