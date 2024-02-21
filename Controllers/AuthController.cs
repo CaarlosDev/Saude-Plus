@@ -33,7 +33,7 @@ namespace SaudePlus.Controllers
             var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Issuer"],
               null,
-              expires: DateTime.Now.AddMinutes(120),
+              expires: DateTime.Now.AddYears(1),
               signingCredentials: credentials);
 
             var token =  new JwtSecurityTokenHandler().WriteToken(Sectoken);
