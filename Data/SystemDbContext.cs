@@ -20,10 +20,5 @@ namespace SaudePlus.Data
             
             base.OnModelCreating(modelBuilder);
         }
-
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseSqlServer("Server=localhost; Database=saudeplus_db; User id=saudeplus; pwd=test123; trusted_connection=true");
-        // }
     }
 }

@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SaudePlus.Models;
 using SaudePlus.Repositories.Interfaces;
 
 namespace SaudePlus.Controllers
 {
+    [Authorize]
     [Route("api/users")]
     [ApiController]
 
@@ -28,21 +29,29 @@ namespace SaudePlus.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserModel>> CreateUser(UserModel user) {
-            UserModel createdUser = await _userRepository.CreateUser(user);
+        public async Task<ActionResult<UserModel>> CreateUser(UserModelRequest user) {
+            UserModel createdUser = await _userRepository.CreateUser(buildUserModel(user));
             return Ok(createdUser);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<UserModel>> UpdateUser(UserModel user, int id) {
-            UserModel createdUser = await _userRepository.UpdateUser(user, id);
-            return Ok(createdUser);
+        public async Task<ActionResult<UserModel>> UpdateUser(UserModelRequest user, int id) {
+            UserModel updatedUser = await _userRepository.UpdateUser(buildUserModel(user), id);
+            return Ok(updatedUser);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<UserModel>> DeleteUser(int id) {
             bool hasDeletedUser = await _userRepository.DeleteUser(id);
             return Ok(hasDeletedUser);
+        }
+
+        private UserModel buildUserModel(UserModelRequest user) {
+            UserModel newUser = new UserModel();
+            newUser.Name = user.Name;
+            newUser.Email = user.Email;
+
+            return newUser;
         }
     }
 }
