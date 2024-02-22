@@ -21,6 +21,7 @@ namespace SaudePlus.Repositories
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
+        
         public async Task<UserModel> CreateUser(UserModel user)
         {
             await _dbContext.Users.AddAsync(user);
@@ -57,6 +58,10 @@ namespace SaudePlus.Repositories
             await _dbContext.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<UserModel?> GetUserByEmail(string email) {
+            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
         }
     }
 }
