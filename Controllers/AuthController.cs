@@ -22,13 +22,13 @@ namespace SaudePlus.Controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(AuthRequest request) {
+            if (!validateEmail(request.Email)) {
+                throw new Exception("Please provide a valid email address.");
+            }
+            
             var userExists = await _userRepository.GetUserByEmail(request.Email);
             if (userExists != null) {
                 throw new Exception("This email is already in use.");
-            }
-
-            if (!validateEmail(request.Email)) {
-                throw new Exception("Please provide a valid email address.");
             }
 
             UserModel user = new UserModel();
