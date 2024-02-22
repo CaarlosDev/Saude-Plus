@@ -9,5 +9,6 @@ namespace SaudePlus.Repositories.Interfaces
         Task<UserModel> CreateUser(UserModel user);
         Task<UserModel> UpdateUser(UserModel user, int id);
         Task<bool> DeleteUser(int id);
+        Task<UserModel?> GetUserByEmail(string email);
     }
 }

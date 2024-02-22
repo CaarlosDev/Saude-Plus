@@ -10,8 +10,8 @@ namespace SaudePlus.Data.Map
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.Cpf).IsRequired().HasMaxLength(15);
-            builder.Property(x => x.Birthday).IsRequired();
+            builder.Property(x => x.Cpf).HasMaxLength(15);
+            builder.Property(x => x.Birthday);
             builder.Property(x => x.Gender).IsRequired();
             builder.Property(x => x.City).IsRequired();
             builder.Property(x => x.IfSmoke).IsRequired();
