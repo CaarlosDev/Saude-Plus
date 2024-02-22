@@ -31,12 +31,7 @@ namespace SaudePlus.Repositories
 
         public async Task<UserModel> UpdateUser(UserModel user, int id)
         {
-            UserModel userById = await GetUserById(id);
-
-            if (userById == null) {
-                throw new Exception("User not found");
-            }
-
+            UserModel userById = await GetUserById(id) ?? throw new Exception("User not found");
             userById.Name = user.Name;
             userById.Email = user.Email;
 
@@ -48,11 +43,7 @@ namespace SaudePlus.Repositories
 
         public async Task<bool> DeleteUser(int id)
         {
-            UserModel userById = await GetUserById(id);
-            
-            if (userById == null) {
-                throw new Exception("User not found");
-            }
+            UserModel userById = await GetUserById(id) ?? throw new Exception("User not found");
 
             _dbContext.Users.Remove(userById);
             await _dbContext.SaveChangesAsync();
